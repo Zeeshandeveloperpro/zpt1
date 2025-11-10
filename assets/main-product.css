@@ -1,0 +1,29 @@
+:root {
+    --grid-column : 15px;
+}
+.grid {
+        display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--grid-column);
+}
+.grid-with-column--media {
+        width: calc(50% - (var(--grid-column) / 2));
+}
+.grid-product--content {
+   width: calc(50% - (var(--grid-column) / 2)); 
+}
+.media__img img{
+  width: 100%;
+  display: block;
+}
+
+.main-product--media {
+    display: flex;
+    /* flex-direction: column; */
+    gap: var(--grid-column);
+    flex-wrap: wrap;
+}
+.media__img:not(:first-child) {
+     width: calc(50% - (var(--grid-column) / 2));
+}

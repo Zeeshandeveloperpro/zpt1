@@ -1,0 +1,5 @@
+.page-width {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-inline: 20px;
+}
