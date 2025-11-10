@@ -1,4 +1,5 @@
 {{ 'main-product.css' |  asset_url |  stylesheet_tag }}
+<script src="{{ 'main-product.js' |  asset_url }}" ></script>
 <div class="product">
     <div class="page-width">
         <div class="grid">
@@ -20,6 +21,28 @@
                 <div class="price">
                         {{ price |  money_without_currency }}
                 </div>
+                <custom-variant class="variant-selector">
+                    {% for option in product.options_with_values %}
+                    <fieldset class="options">
+                        <legend>
+                            {{ option.name }}
+                        </legend>
+                        {% for value in option.values %}
+                        <input type="radio" class="option_value" id="{{value }}--{{ forloop.index }}" value="{{ value }}" name="{{ option.name }}"
+                        {% if option.selected_value == value or forloop.first %} checked="" {% endif %}>
+                        <label for="{{ value }}--{{ forloop.index }}"> {{ value }}</label>
+                        
+                        {% endfor %}
+                        
+                    </fieldset>
+                    {% endfor %}
+                    {%- form 'product', product -%}
+                        <input type="hidden"  name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+                        <input type="submit" value="Add to car" />
+                    {% endform %}
+                   
+                    
+                </custom-variant>
 
             </div>
 
@@ -27,13 +50,15 @@
 
     </div>
 </div>
-<script>
+<script type="application/json">
     {{ product |  json }}
 </script>
 
 <script data-product-variants>
     {{ product.variants |  json }}
 </script>
+
+
 
 {% schema %}
 {
